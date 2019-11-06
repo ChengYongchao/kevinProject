@@ -1,9 +1,4 @@
-/*
- * @(#)Solution002.java, 2019年11月6日 下午1:48:00
- *
- * Copyright (c) 2018-2019, 四川蜀天梦图数据科技有限公司.
- * All rights reserved.
- */
+
 package cyc.java.leetcode;
 
 import org.junit.Test;

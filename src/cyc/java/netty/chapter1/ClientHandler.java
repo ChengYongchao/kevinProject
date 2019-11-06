@@ -1,9 +1,4 @@
-/*
- * @(#)ClientHandler.java, 2019年10月29日 上午10:27:24
- *
- * Copyright (c) 2018-2019, 四川蜀天梦图数据科技有限公司.
- * All rights reserved.
- */
+
 package cyc.java.netty.chapter1;
 
 import io.netty.buffer.ByteBuf;

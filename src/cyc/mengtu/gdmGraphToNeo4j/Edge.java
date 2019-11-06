@@ -1,9 +1,4 @@
-/*
- * @(#)Edge.java, 2019年10月14日 下午3:22:58
- *
- * Copyright (c) 2018-2019, 四川蜀天梦图数据科技有限公司.
- * All rights reserved.
- */
+
 package cyc.mengtu.gdmGraphToNeo4j;
 
 /**

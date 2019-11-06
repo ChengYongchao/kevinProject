@@ -1,9 +1,4 @@
-/*
- * @(#)gdmToNeo4j.java, 2019年10月14日 下午3:04:07
- *
- * Copyright (c) 2018-2019, 四川蜀天梦图数据科技有限公司.
- * All rights reserved.
- */
+
 package cyc.mengtu.gdmGraphToNeo4j;
 
 import java.io.BufferedReader;
