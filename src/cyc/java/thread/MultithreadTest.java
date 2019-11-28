@@ -4,8 +4,12 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
 import java.util.concurrent.FutureTask;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.TimeUnit;
+
+import org.junit.Test;
 
 public class MultithreadTest
 {
@@ -57,72 +61,6 @@ public class MultithreadTest
             e.printStackTrace();
         }
 
-        // 线程同步
-        Good good = new Good();
-
-        ExecutorService es = Executors.newFixedThreadPool(2);
-        es.execute(() ->
-        {
-            while (good.getGoodsNum() < 100)
-            {
-                try
-                {
-                    Thread.sleep(10);
-                }
-                catch (InterruptedException e)
-                {
-                    e.printStackTrace();
-                }
-                System.out.println("线程1获取商品数量：" + good.getGoodsNum());
-                good.setGoodsNum(5);
-                System.out.println("线程1添加商品数量后还有：" + good.getGoodsNum());
-            }
-            System.out.println("商品数量超过 100");
-        });
-        es.execute(() ->
-        {
-            try
-            {
-                Thread.sleep(10);
-            }
-            catch (InterruptedException e)
-            {
-                e.printStackTrace();
-            }
-            System.out.println("线程2获取商品数量：" + good.getGoodsNum());
-            while (good.getGoodsNum() > 0)
-            {
-                try
-                {
-                    Thread.sleep(10);
-                }
-                catch (InterruptedException e)
-                {
-                    e.printStackTrace();
-                }
-
-                good.reduceGoodsNum(1);
-                System.out.println("线程2减少商品数量后还剩： " + good.getGoodsNum());
-            }
-            System.out.println("商品数量为0");
-        });
-        Future<Integer> fu = es.submit(() ->
-        {
-            Thread.sleep(100);
-            return good.getGoodsNum();
-        });
-        try
-        {
-            System.out.println("where am I：" + fu.get());
-        }
-        catch (InterruptedException e)
-        {
-            e.printStackTrace();
-        }
-        catch (ExecutionException e)
-        {
-            e.printStackTrace();
-        }
     }
 
     public static class SubThread extends Thread
@@ -154,31 +92,62 @@ public class MultithreadTest
 
     }
 
-    public static class Good
+    @Test
+    public void testThread()
     {
-        private int goodsNum = 0;
-
-        public synchronized int getGoodsNum()
+        new Thread(() ->
         {
-            return goodsNum;
-        }
-
-        public synchronized void setGoodsNum(int goodsNum)
-        {
-            this.goodsNum += goodsNum;
-        }
-
-        public synchronized boolean reduceGoodsNum(int goodsNum)
-        {
-            if (this.goodsNum > 0)
+            while (true)
             {
-                this.goodsNum -= goodsNum;
-                return true;
-
+                System.out.println("我是" + Thread.currentThread().getName() + ",我飘过了");
+                try
+                {
+                    Thread.sleep(1000);
+                }
+                catch (InterruptedException e)
+                {
+                    e.printStackTrace();
+                }
             }
-            return false;
+        }, "thread1").start();
 
+        new Thread(() ->
+        {
+            Thread.currentThread().setName("Thread2");
+            while (true)
+            {
+                System.out.println("我是" + Thread.currentThread().getName() + ",我飘过了");
+                try
+                {
+                    Thread.sleep(1000);
+                }
+                catch (InterruptedException e)
+                {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+    }
+
+    @Test
+    public void testThreadPool()
+    {
+        ExecutorService service = Executors.newFixedThreadPool(2);
+        service.submit(() ->
+        {
+            // do Something
+        });
+
+        // 周期线程池
+        ScheduledExecutorService service2 = Executors.newScheduledThreadPool(2);
+        ScheduledFuture<?> future = service2.scheduleAtFixedRate(() ->
+        {
+            // do something regularly
+        }, 0, 5, TimeUnit.SECONDS);// 0代表延迟0s执行，5代表每5s执行一次
+        if (true)// The trigger flag you want
+        {
+            future.cancel(true);
+            service.shutdown();
         }
-
     }
 }

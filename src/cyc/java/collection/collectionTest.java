@@ -7,6 +7,8 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.junit.Test;
+
 public class collectionTest
 {
     public static void main(String[] args)
@@ -50,7 +52,7 @@ public class collectionTest
          * v1.removeElementAt(-1); v1.insertElementAt(4, -1);
          */
         System.out.println(v1.toArray().toString());
-        
+
         linkedListTest();
     }
 
@@ -65,4 +67,13 @@ public class collectionTest
         list1.add(5);
         l1.addAll(list1);
     }
+
+    @Test
+    public void testListToArray()
+    {
+        List<Integer> list = new ArrayList<>();
+        list.add(1);
+        list.add(2);
+        Integer[] arr1 = list.toArray(new Integer[list.size()]);
+    }   
 }
