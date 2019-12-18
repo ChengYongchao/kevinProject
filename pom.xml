@@ -12,7 +12,17 @@
 			<artifactId>netty-all</artifactId>
 			<version>4.1.42.Final</version>
 		</dependency>
+		<!-- 只是图谱包 -->
+		<!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient -->
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>4.5.6</version>
+		</dependency>
+
 	</dependencies>
+
+
 	<build>
 		<sourceDirectory>src</sourceDirectory>
 		<plugins>
