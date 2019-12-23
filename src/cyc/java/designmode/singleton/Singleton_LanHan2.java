@@ -1,9 +1,4 @@
-/*
- * @(#)Singleton_LanHan2.java, 2019年12月16日 下午3:36:26
- *
- * Copyright (c) 2018-2019, 四川蜀天梦图数据科技有限公司.
- * All rights reserved.
- */
+
 package cyc.java.designmode.singleton;
 
 /**

@@ -1,9 +1,4 @@
-/*
- * @(#)Template.java, 2019年12月17日 下午2:42:27
- *
- * Copyright (c) 2018-2019, 四川蜀天梦图数据科技有限公司.
- * All rights reserved.
- */
+
 package cyc.java.designmode.TemplateMethodPatternExtend;
 
 /**

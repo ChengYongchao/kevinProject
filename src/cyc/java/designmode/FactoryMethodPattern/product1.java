@@ -1,9 +1,4 @@
-/*
- * @(#)product1.java, 2019年12月17日 上午9:50:20
- *
- * Copyright (c) 2018-2019, 四川蜀天梦图数据科技有限公司.
- * All rights reserved.
- */
+
 package cyc.java.designmode.FactoryMethodPattern;
 
 /**

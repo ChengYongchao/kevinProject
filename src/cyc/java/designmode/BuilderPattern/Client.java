@@ -1,9 +1,4 @@
-/*
- * @(#)Client.java, 2019年12月18日 上午9:52:57
- *
- * Copyright (c) 2018-2019, 四川蜀天梦图数据科技有限公司.
- * All rights reserved.
- */
+
 package cyc.java.designmode.BuilderPattern;
 
 import cyc.java.designmode.BuilderPattern.Person.Builder;
