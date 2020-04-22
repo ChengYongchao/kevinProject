@@ -3,9 +3,11 @@ package cyc.java.collection;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import org.junit.Test;
 
@@ -75,5 +77,33 @@ public class collectionTest
         list.add(1);
         list.add(2);
         Integer[] arr1 = list.toArray(new Integer[list.size()]);
-    }   
+    }
+
+    @Test
+    public void testIterator()
+    {
+        Map<Integer, Integer> map = new HashMap<>();
+        map.put(1, 2);
+        map.put(2, 2);
+        map.put(3, 2);
+        map.put(4, 2);
+        map.put(5, 2);
+        map.put(6, 2);
+        map.put(7, 2);
+        ArrayList<Integer> arr = new ArrayList<>();
+        arr.add(1);
+        arr.add(2);
+        arr.add(3);
+        arr.add(4);
+        arr.add(5);
+        arr.add(6);
+        arr.add(7);
+        Iterator<Integer> it = arr.iterator();
+        while (it.hasNext())
+        {
+            System.out.println(it.next());
+            it.remove();
+        }
+
+    }
 }

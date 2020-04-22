@@ -11,6 +11,7 @@ import cyc.java.designmode.FactoryMethodPattern.Product;
  */
 public class Factory
 {
+    @SuppressWarnings ("unchecked")
     public static <T extends Product> T createProduct(Class<T> c)
     {
         Product product = null;
