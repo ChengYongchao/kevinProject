@@ -1,7 +1,6 @@
 package cyc.java.stream;
 
 import java.io.IOException;
-import java.net.Inet4Address;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -21,10 +20,8 @@ import java.util.Set;
 import java.util.Stack;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import cyc.java.collection.Vector;
