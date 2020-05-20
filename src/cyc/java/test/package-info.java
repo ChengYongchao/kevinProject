@@ -1,2 +1,0 @@
-
-package cyc.java.test;
