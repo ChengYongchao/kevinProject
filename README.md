@@ -13,7 +13,7 @@
 
 # Stream流
 
-代码于[Java8StreamAPI.java](https://github.com/ChengYongchao/kevinProject/blob/master/src/cyc/java/stream/Java8StreamAPI.java)，看代码食用更香🍋
+代码于[Java8StreamAPI.java](https://github.com/ChengYongchao/kevinProject/blob/master/src/main/java/com/kevin/stream/Java8StreamAPI.java)，看代码食用更香🍋
 
 - 各个容器类实现Stream的方式:
 	 - 所有的继承于**Collection**的容器类都可以通过调用Collection于1.8实现的stream方法
