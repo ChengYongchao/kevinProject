@@ -1,5 +1,7 @@
 package cyc.java.stream;
 
+import static org.junit.Assert.assertEquals;
+
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
@@ -227,11 +229,38 @@ public class Java8StreamAPI
         Stream.of(1, 2, 3).mapToLong(Long::valueOf);
     }
 
-    // =============================stream收集器 ===============================//
-
+    /**
+     * 对Map进行排序
+     */
     @Test
-    public void test4()
+    public void sortedMap()
     {
+        Map<String, String> map = new LinkedHashMap<>();
+        // 方法一
+        map = map.entrySet().stream().sorted((a, b) -> b.getValue().compareTo(a.getValue()))
+                .collect(Collectors.toMap(e -> e.getKey(), e -> e.getValue()));
+        // 方法二（其实就是对方法一的封装）
+        map = map.entrySet().stream().sorted(Map.Entry.<String, String> comparingByValue().reversed())
+                .collect(Collectors.toMap(e -> e.getKey(), e -> e.getValue()));
+    }
+
+    // =============================优雅的结束Stream流===============================//
+
+    /**
+     * 优雅的结束Stream流
+     */
+    @SuppressWarnings ("unused")
+    @Test
+    public void endStreamTest()
+    {
+        // 返回Map
+        Stream.of("a", "b", "c").collect(Collectors.toMap(s -> s, s -> s));
+        // 返回 List
+        Stream.of("a", "b", "c").collect(Collectors.toList());
+        // 返回Set
+        Stream.of("a", "b", "c").collect(Collectors.toSet());
+
+        // ========================stream收集器 =============================//
         /**
          * @description:求数量
          */
@@ -248,25 +277,25 @@ public class Java8StreamAPI
         {
             return (x < y) ? -1 : ((x == y) ? 0 : 1);
         });
-        System.out.println(res1.get());
+        assertEquals((int)res1.get(), 3);
         // 写法2 依据数值流比较大小不需要参数
         OptionalInt res2 = Stream.of(1, 2, 3, 3).mapToInt(a ->
         {
             return a;
         }).max();
-        System.out.println(res2.getAsInt());
+        assertEquals((int)res2.getAsInt(), 3);
         // 写法3 借助已有的Collectors.maxBy方法，没啥用，知道能这样写就好
         Optional<Integer> res3 = Stream.of(1, 2, 3, 3).collect(Collectors.maxBy(Comparator.comparingInt(a ->
         {
             return a;
         })));
-        System.out.println(res3.get());
+        assertEquals((int)res3.get(), 3);
 
         /**
          * @description:求和、求平均值 方法也很多，类似求最值
          */
 
-        /****************** stream连接字符串 ******************/
+        // ========================stream连接字符串 =============================//
         /**
          * @description:连接字符串，默认中间无连接符，可以在joining方法中加入连接符 joining("_")
          */
@@ -290,7 +319,7 @@ public class Java8StreamAPI
             return a + b;
         }));
 
-        /****************** stream分组 ******************/
+        // ========================stream连接字符串 =============================//
         /**
          * @description:将元素按指定规则分组
          */
@@ -328,35 +357,5 @@ public class Java8StreamAPI
                 return "isOthers";
             }
         }, Collectors.counting()));
-    }
-
-    /**
-     * 优雅的结束Stream流
-     */
-    @Test
-    public void endStreamTest()
-    {
-        // 返回Map
-        Stream.of("a", "b", "c").collect(Collectors.toMap(s -> s, s -> s));
-        // 返回 List
-        Stream.of("a", "b", "c").collect(Collectors.toList());
-        // 返回Set
-        Stream.of("a", "b", "c").collect(Collectors.toSet());
-    }
-
-    /**
-     * 对Map进行排序
-     */
-    @Test
-    public void sortedMap()
-    {
-        Map<String, String> map = new LinkedHashMap<>();
-        // 方法一
-        map = map.entrySet().stream().sorted((a, b) -> b.getValue().compareTo(a.getValue()))
-                .collect(Collectors.toMap(e -> e.getKey(), e -> e.getValue()));
-        // 方法二（其实就是对方法一的封装）
-        map = map.entrySet().stream().sorted(Map.Entry.<String, String> comparingByValue().reversed())
-                .collect(Collectors.toMap(e -> e.getKey(), e -> e.getValue()));
-
     }
 }

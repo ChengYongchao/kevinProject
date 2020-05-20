@@ -1,5 +1,5 @@
 # kevinProject
-本项目丢一些日常代码💾，总体以Java特性的学习为主，配菜有总结的📑Java编程模板、Java实现的《设计模式之禅》中的设计模式、Netty的入门demo。🙃
+本项目丢一些日常代码💾，总体以Java特性的学习为主，配菜有总结的Java编程模板、Java实现的《设计模式之禅》中的设计模式、Netty的入门demo。🙃
 
 
 
@@ -24,8 +24,8 @@
 	  - 生成器获取流
 - Stream流的常用方法
 - 普通流到数值流的转换
-- Stream收集器，优雅的结束stream
 - 对Map进行排序
+- Stream收集器，优雅的结束stream
 
 
 
