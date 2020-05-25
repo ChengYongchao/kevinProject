@@ -45,7 +45,7 @@ public class Java8StreamAPI
         list.add("b");
         list.add("c");
         list.stream();
-
+        assertEquals(list.get(0), "a");
         // Set
         Set<Integer> set = new HashSet<Integer>();
         set.add(1);
@@ -103,6 +103,14 @@ public class Java8StreamAPI
         }
         catch (IOException e)
         {}
+
+        // 拓展：无限流的创建
+
+        // 迭代
+        Stream.iterate(0, x -> x + 1);
+        // 随机生成
+        Stream.generate(() -> Math.random());
+
     }
 
     // =============================stream方法===============================//
