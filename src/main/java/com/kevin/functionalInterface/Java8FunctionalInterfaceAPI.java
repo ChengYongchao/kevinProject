@@ -8,8 +8,10 @@ import java.util.function.BiPredicate;
 import java.util.function.BinaryOperator;
 import java.util.function.BooleanSupplier;
 import java.util.function.Consumer;
+import java.util.function.DoubleBinaryOperator;
 import java.util.function.DoublePredicate;
 import java.util.function.Function;
+import java.util.function.IntBinaryOperator;
 import java.util.function.ObjIntConsumer;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
@@ -66,29 +68,34 @@ public class Java8FunctionalInterfaceAPI
         Function<String, Integer> function = Integer::parseInt;
         assertEquals(12, (int)function.apply("12"));
         // 下面列举的是对Function的细化，没什么好说的，顾名思义
-        // DoubleFunction<R>(DoubleToIntFunction、DoubleTOLongFunction)、
-        // LongFunction<R>(LongToDoubleFunction、LongToIntFunction)、
+
         // IntFunction<R>(IntToLongFunction、IntToDoubleFunction)、
-        // ToxxxFunction(ToDoubleFunction<T>、ToIntFunction<T>、ToLongFunction<T>)
+        // LongFunction<R>(LongToIntFunction、LongToDoubleFunction)、
+        // DoubleFunction<R>(DoubleToIntFunction、DoubleToLongFunction)、
+        // ToxxxFunction(ToIntFunction<T>、ToDoubleFunction<T>、ToLongFunction<T>)
 
         // BiFunction<T, U, R> 接收两个参数 返回一个R类型的结果
         BiFunction<Integer, Integer, String> biFunction = (a, b) -> String.valueOf(a + b);
         assertEquals("3", biFunction.apply(1, 2));
 
         // 下面列举的是对BiFunction的细化
-        // ToDoubleBiFunction<T, U>、ToLongBiFunction<T, U>、ToIntBiFunction<T, U>
+        // ToIntBiFunction<T, U>、ToDoubleBiFunction<T, U>、ToLongBiFunction<T, U>
 
         // ===========================Operator函数式接口=============================================/
         // 接收一个T类型的参数返回一个相同类型的结果，UnaryOperator有一个静态方法identity，返回操作符UnaryOperator对象本身
         UnaryOperator<Integer> unaryoperator = x -> x + 1;
         assertEquals(11, (int)unaryoperator.apply(10));
         // 下面列举的是对UnaryOperator的细化
-        // DoubleUnaryOperator、LongUnaryOperator、IntUnaryOperator
+        // IntUnaryOperator、DoubleUnaryOperator、LongUnaryOperator
 
         // 接收两个相同类型的参数，转换成相同类型的结果输出，BinaryOperator和BiFunction不同的地方在于，提供了两个静态函数：minBy、maxBy用来返回带有比较器的BinaryOperator
         BinaryOperator<Integer> binaryOperator = (a, b) -> a + b;
         assertEquals(3, (int)binaryOperator.apply(1, 2));
         BinaryOperator<Integer> maxBinaryOperator = BinaryOperator.maxBy((a, b) -> Integer.compare(a, b));
         assertEquals(2, (int)maxBinaryOperator.apply(1, 2));
+        // 下面列举的是对BinaryOperator<T>的细化
+        // IntBinaryOperator、DoubleBinaryOperator、LongBinaryOperator
+        IntBinaryOperator intBinaryOperator = (a, b) -> a + b;
+        assertEquals(3, (int)intBinaryOperator.applyAsInt(1, 2));
     }
 }
