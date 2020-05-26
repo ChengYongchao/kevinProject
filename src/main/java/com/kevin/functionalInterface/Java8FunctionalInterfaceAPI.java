@@ -1,16 +1,19 @@
 package com.kevin.functionalInterface;
 
+import static org.junit.Assert.assertEquals;
+
 import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
 import java.util.function.BiPredicate;
+import java.util.function.BinaryOperator;
 import java.util.function.BooleanSupplier;
 import java.util.function.Consumer;
 import java.util.function.DoublePredicate;
 import java.util.function.Function;
-import java.util.function.IntSupplier;
 import java.util.function.ObjIntConsumer;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
+import java.util.function.UnaryOperator;
 
 import org.junit.Test;
 
@@ -40,76 +43,52 @@ public class Java8FunctionalInterfaceAPI
         // ==================================供给型函数式接口=============================================/
         // 返回一个Integer类型整数
         Supplier<Integer> supplier = () -> 1;
-        supplier.get();
+        assertEquals(1, (int)supplier.get());
         // BooleanSupplier、DoubleSupplier、IntSupplier、LongSupplier 顾名思义不废话
         BooleanSupplier booleanSupplier = () -> true;
-        booleanSupplier.getAsBoolean();
+        assertEquals(true, booleanSupplier.getAsBoolean());
 
         // ==================================断言型函数式接口=============================================/
-        // 接收一个参数断言
+        // 接收一个参数断言,Predicate有四个方法：test、and、or、 negate 分别对应 判断、与、或、非
         Predicate<String> predicate = (a) -> "".equals(a);
-        predicate.negate();
+        assertEquals(false, predicate.test("s"));
+        assertEquals(true, predicate.negate().test("s"));
         // 接收两个参数断言
         BiPredicate<String, String> biPredicate = (a, b) -> a.equals(b);
-        biPredicate.negate();
+        assertEquals(false, biPredicate.test("s", "b"));
         // 限定接收一个为double的参数：XXXPredicate 其中xxx为：Double、Int、Long
         DoublePredicate doublePredivate = (a) -> Double.valueOf(0.0d).equals(a);
-        doublePredivate.negate();
+        doublePredivate.test(1);
+        assertEquals(false, doublePredivate.test(1));
 
-    }
+        // ===========================Function<T,R>函数式接口=============================================/
+        // 接收一个T类型参数返回一个Integer类型的结果
+        Function<String, Integer> function = Integer::parseInt;
+        assertEquals(12, (int)function.apply("12"));
+        // 下面列举的是对Function的细化，没什么好说的，顾名思义
+        // DoubleFunction<R>(DoubleToIntFunction、DoubleTOLongFunction)、
+        // LongFunction<R>(LongToDoubleFunction、LongToIntFunction)、
+        // IntFunction<R>(IntToLongFunction、IntToDoubleFunction)、
+        // ToxxxFunction(ToDoubleFunction<T>、ToIntFunction<T>、ToLongFunction<T>)
 
-    public static void main(String[] args)
-    {
-        // 自定义函数式接口
-        // 通过类实现接口
+        // BiFunction<T, U, R> 接收两个参数 返回一个R类型的结果
+        BiFunction<Integer, Integer, String> biFunction = (a, b) -> String.valueOf(a + b);
+        assertEquals("3", biFunction.apply(1, 2));
 
-        BiConsumer<Integer, Integer> bc1 = (a, b) ->
-        {
-            System.out.println(a + b);
-        };
-        bc1.accept(44, 55);
+        // 下面列举的是对BiFunction的细化
+        // ToDoubleBiFunction<T, U>、ToLongBiFunction<T, U>、ToIntBiFunction<T, U>
 
-        // 供给型接口 Supplier<T>
-        Supplier<Integer> sp1 = () ->
-        {
-            return 1;
-        };
-        int num1 = sp1.get();
-        IntSupplier is1 = () ->
-        {
-            return 33;
-        };
-        int num2 = is1.getAsInt();
+        // ===========================Operator函数式接口=============================================/
+        // 接收一个T类型的参数返回一个相同类型的结果，UnaryOperator有一个静态方法identity，返回操作符UnaryOperator对象本身
+        UnaryOperator<Integer> unaryoperator = x -> x + 1;
+        assertEquals(11, (int)unaryoperator.apply(10));
+        // 下面列举的是对UnaryOperator的细化
+        // DoubleUnaryOperator、LongUnaryOperator、IntUnaryOperator
 
-        // 函数型接口 Function<T,R>
-        Function<Integer, String> fun = a ->
-        {
-            return a.toString();
-        };
-        System.out.println(fun.apply(99999));
-        BiFunction<String, String, String> bfun = (a, b) ->
-        {
-            return a + b;
-        };
-        System.out.println(bfun.apply("hello", " java"));
-
-        // 断言型接口 Predicate<T>
-
-        Predicate<Integer> pd1 = a ->
-        {
-            return a == 9;
-        };
-        Predicate<Integer> pd2 = a ->
-        {
-            return a != 8;
-        };
-        System.out.println(pd1.test(9) + " " + pd1.negate().test(9));
-        System.out.println(pd1.and(pd2).test(8));
-        BiPredicate<Integer, String> bpd = (a, b) ->
-        {
-            return a == 8 && "8".equals(b);
-        };
-        System.out.println(bpd.test(8, "8"));
-
+        // 接收两个相同类型的参数，转换成相同类型的结果输出，BinaryOperator和BiFunction不同的地方在于，提供了两个静态函数：minBy、maxBy用来返回带有比较器的BinaryOperator
+        BinaryOperator<Integer> binaryOperator = (a, b) -> a + b;
+        assertEquals(3, (int)binaryOperator.apply(1, 2));
+        BinaryOperator<Integer> maxBinaryOperator = BinaryOperator.maxBy((a, b) -> Integer.compare(a, b));
+        assertEquals(2, (int)maxBinaryOperator.apply(1, 2));
     }
 }
