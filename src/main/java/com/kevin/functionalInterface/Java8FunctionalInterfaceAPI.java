@@ -8,7 +8,6 @@ import java.util.function.BiPredicate;
 import java.util.function.BinaryOperator;
 import java.util.function.BooleanSupplier;
 import java.util.function.Consumer;
-import java.util.function.DoubleBinaryOperator;
 import java.util.function.DoublePredicate;
 import java.util.function.Function;
 import java.util.function.IntBinaryOperator;
