@@ -52,13 +52,7 @@ public class Java8StreamAPI
         set.add(2);
         set.add(3);
         set.stream();
-
-        // ArrayList
-        ArrayList<Integer> arrList = new ArrayList<>();
-        arrList.add(1);
-        arrList.add(2);
-        arrList.stream();
-
+        set.parallelStream();
         // Vector
         Vector<Integer> vector = new Vector<>();
         vector.add(1);
@@ -81,7 +75,7 @@ public class Java8StreamAPI
         Map<Integer, String> map = new HashMap<>();
         map.put(1, "a");
         map.put(2, "b");
-        map.entrySet().stream();
+        map.entrySet().parallelStream();
 
         /**
          * {@code Arrays}在JDK1.8中加入了stream系列方法， 数组可以调用Arrays.stream(T []
@@ -90,16 +84,17 @@ public class Java8StreamAPI
         // 数组
         String[] arr = {"a", "b", "c"};
         Arrays.stream(arr);
-
+        
         // 值，直接将值转变成流对象
         Stream.of("a", "b", "c");
 
         // 从IO获取流
         try (
-            Stream<String> lines = Files.lines(Paths.get("文件路径名"), Charset.defaultCharset())
+            Stream<String> lines = Files.lines(Paths.get("E:\\csv\\Vertex.csv"), Charset.defaultCharset())
         )
         {
             // 可对lines做一些操作
+            lines.limit(10).forEach(System.out::println);
         }
         catch (IOException e)
         {}
@@ -107,7 +102,7 @@ public class Java8StreamAPI
         // 拓展：无限流的创建
 
         // 迭代
-        Stream.iterate(0, x -> x + 1);
+        Stream.iterate(0, x -> x + 1).limit(10).forEach(System.out::println);
         // 随机生成
         Stream.generate(() -> Math.random());
 
@@ -161,7 +156,7 @@ public class Java8StreamAPI
         /**
          * @description flatMap() 将流扁平化，说人话就是将流中最基层的元素抽出来为单独的流，eg:
          *              List<List<Integer>>
-         *              类型的，会把最底层的Integer抽取出来，和map()不同的是map()将List<Integer>视为一个流进行处理
+         *              类型的，会把最底层的Integer抽取出来，和map()不同的是map()将List<Integer>视为一个元素进行处理
          */
         // 写法1
         Stream.of(Arrays.asList(1, 2), Arrays.asList(3, 4), Arrays.asList(5, 6, 7)).flatMap(Collection::stream).map(a ->
@@ -249,6 +244,7 @@ public class Java8StreamAPI
         // 方法二（其实就是对方法一的封装）
         map = map.entrySet().stream().sorted(Map.Entry.<String, String> comparingByValue().reversed())
                 .collect(Collectors.toMap(e -> e.getKey(), e -> e.getValue()));
+        map.entrySet().stream().collect(Collectors.toMap(e -> e.getKey(), e -> e.getValue()));
     }
 
     // =============================优雅的结束Stream流===============================//
@@ -266,6 +262,9 @@ public class Java8StreamAPI
         Stream.of("a", "b", "c").collect(Collectors.toList());
         // 返回Set
         Stream.of("a", "b", "c").collect(Collectors.toSet());
+        //返回数组
+        Stream.of("a", "b", "c").toArray();
+        
 
         // ========================stream收集器 =============================//
         /**

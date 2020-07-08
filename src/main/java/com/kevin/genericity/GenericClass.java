@@ -6,7 +6,10 @@
  */
 package com.kevin.genericity;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 在这里加入功能说明
@@ -48,7 +51,7 @@ public class GenericClass<T>
         return 0;
     }
 
-    public static void main(String[] args)
+    public static void main(String[] args) throws NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException
     {
         // 这两个参数都是Integer，所以V为Integer
         int res = GenericClass.add(1, 2);
@@ -57,20 +60,34 @@ public class GenericClass<T>
         // 这两个参数一个是Integer，一个是String，所以取同一父类，为Object
         Object res3 = GenericClass.add(1, "2");
 
-        ArrayList<String> list1 = new ArrayList<String>();
+        List<String> list1 = new ArrayList<String>();
         list1.add("1"); // 编译通过
         // list1.add(1); //编译错误
         String str1 = list1.get(0); // 返回类型为String
 
-        ArrayList list2 = new ArrayList<String>();
+        List list2 = new ArrayList<String>();
         list2.add("1"); // 编译通过
         list2.add(1); // 编译通过
         Object object = list2.get(0); // 返回类型为Object
 
-        new ArrayList<String>().add("11"); // String 编译通过
-        new ArrayList<>().add(22); // Object 编译通过
-        // new ArrayList<String>().add(11); //String 编译错误
+        
+        
+        
+        //Java 泛型为何是伪泛型
+        List<Integer> list = new ArrayList<>();
+        list.add(1);
 
-        String str2 = new ArrayList<String>().get(0); // 返回类型就是String
+        //list.add("a"); // 这样直接添加肯定是不允许的
+
+        //下面通过java的反射，绕过泛型 来给添加字符串
+
+        Method add = list.getClass().getMethod("add", Object.class);
+
+        add.invoke(list,"a");
+
+        System.out.println(list); //[1, a] 输出没有没问题
+
+        System.out.println(list.get(1)); //a
+
     }
 }
