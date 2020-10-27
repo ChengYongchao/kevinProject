@@ -22,7 +22,7 @@ public class Test
     public static int method()
     {
         int a = 1;
-        int b[] = {};
+        int[] b = {};
         try
         {
             b[2] = 0;

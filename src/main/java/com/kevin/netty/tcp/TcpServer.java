@@ -9,7 +9,6 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.util.concurrent.Future;
 
-
 public class TcpServer
 {
     // private Logger log = LoggerFactory.getLogger(getClass());
@@ -31,9 +30,9 @@ public class TcpServer
         // 创建ServerBootstrap实例
         ServerBootstrap serverBootstrap = new ServerBootstrap();
         // 初始化ServerBootstrap的线程组
-        serverBootstrap.group(bossGroup, workerGroup);//
+        serverBootstrap.group(bossGroup, workerGroup); //
         // 设置将要被实例化的ServerChannel类
-        serverBootstrap.channel(NioServerSocketChannel.class);//
+        serverBootstrap.channel(NioServerSocketChannel.class); //
         // 在ServerChannelInitializer中初始化ChannelPipeline责任链，并添加到serverBootstrap中
         serverBootstrap.childHandler(new ServerChannelInitializer());
         // 标识当服务器请求处理线程全满时，用于临时存放已完成三次握手的请求的队列的最大长度
@@ -103,6 +102,6 @@ public class TcpServer
     {
         TcpServer server = new TcpServer();
         server.startServer();
-        
+
     }
 }

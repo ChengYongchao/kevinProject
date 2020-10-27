@@ -9,13 +9,13 @@ package com.kevin.designmode.singleton;
  */
 public class Singleton_EHan
 {
-    private static final Singleton_EHan singleton = new Singleton_EHan();
+    private static final Singleton_EHan SINGLETON = new Singleton_EHan();
 
     private Singleton_EHan()
     {}
 
     public static Singleton_EHan getInstance()
     {
-        return singleton;
+        return SINGLETON;
     }
 }

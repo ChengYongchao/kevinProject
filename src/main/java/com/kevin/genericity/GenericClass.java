@@ -1,9 +1,3 @@
-/*
- * @(#)GenericClass.java, 2020年6月3日 上午10:36:27
- *
- * Copyright (c) 2018-2020, 四川蜀天梦图数据科技有限公司.
- * All rights reserved.
- */
 package com.kevin.genericity;
 
 import java.lang.reflect.InvocationTargetException;
@@ -51,7 +45,8 @@ public class GenericClass<T>
         return 0;
     }
 
-    public static void main(String[] args) throws NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException
+    public static void main(String[] args) throws NoSuchMethodException, SecurityException, IllegalAccessException,
+            IllegalArgumentException, InvocationTargetException
     {
         // 这两个参数都是Integer，所以V为Integer
         int res = GenericClass.add(1, 2);
@@ -70,24 +65,21 @@ public class GenericClass<T>
         list2.add(1); // 编译通过
         Object object = list2.get(0); // 返回类型为Object
 
-        
-        
-        
-        //Java 泛型为何是伪泛型
+        // Java 泛型为何是伪泛型
         List<Integer> list = new ArrayList<>();
         list.add(1);
 
-        //list.add("a"); // 这样直接添加肯定是不允许的
+        // list.add("a"); // 这样直接添加肯定是不允许的
 
-        //下面通过java的反射，绕过泛型 来给添加字符串
+        // 下面通过java的反射，绕过泛型 来给添加字符串
 
         Method add = list.getClass().getMethod("add", Object.class);
 
-        add.invoke(list,"a");
+        add.invoke(list, "a");
 
-        System.out.println(list); //[1, a] 输出没有没问题
+        System.out.println(list); // [1, a] 输出没有没问题
 
-        System.out.println(list.get(1)); //a
+        System.out.println(list.get(1)); // a
 
     }
 }

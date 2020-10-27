@@ -14,15 +14,18 @@ import io.netty.handler.stream.ChunkedWriteHandler;
  *
  * @author <a href="mailto:norman.maurer@gmail.com">Norman Maurer</a>
  */
-public class ChatServerInitializer extends ChannelInitializer<Channel> {
+public class ChatServerInitializer extends ChannelInitializer<Channel>
+{
     private final ChannelGroup group;
 
-    public ChatServerInitializer(ChannelGroup group) {
+    public ChatServerInitializer(ChannelGroup group)
+    {
         this.group = group;
     }
 
     @Override
-    protected void initChannel(Channel ch) throws Exception {
+    protected void initChannel(Channel ch) throws Exception
+    {
         ChannelPipeline pipeline = ch.pipeline();
         pipeline.addLast(new HttpServerCodec());
         pipeline.addLast(new ChunkedWriteHandler());

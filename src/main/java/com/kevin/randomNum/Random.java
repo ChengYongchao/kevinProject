@@ -9,14 +9,15 @@ package com.kevin.randomNum;
  */
 public class Random
 {
-    private final static int NUM = 685230; 
+    private static final int NUM = 685230;
+
     public static void main(String[] args)
     {
 
         for (int i = 0; i < 5; i++)
         {
-            System.out.println(
-                    (int)(1 + Math.random() * (NUM - 1 + 1)) + " " + (int)(1 + Math.random() * (NUM - 1 + 1)));
+            System.out
+                    .println((int)(1 + Math.random() * (NUM - 1 + 1)) + " " + (int)(1 + Math.random() * (NUM - 1 + 1)));
         }
     }
 }

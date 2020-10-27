@@ -84,7 +84,7 @@ public class Java8StreamAPI
         // 数组
         String[] arr = {"a", "b", "c"};
         Arrays.stream(arr);
-        
+
         // 值，直接将值转变成流对象
         Stream.of("a", "b", "c");
 
@@ -97,7 +97,9 @@ public class Java8StreamAPI
             lines.limit(10).forEach(System.out::println);
         }
         catch (IOException e)
-        {}
+        {
+
+        }
 
         // 拓展：无限流的创建
 
@@ -262,9 +264,8 @@ public class Java8StreamAPI
         Stream.of("a", "b", "c").collect(Collectors.toList());
         // 返回Set
         Stream.of("a", "b", "c").collect(Collectors.toSet());
-        //返回数组
+        // 返回数组
         Stream.of("a", "b", "c").toArray();
-        
 
         // ========================stream收集器 =============================//
         /**

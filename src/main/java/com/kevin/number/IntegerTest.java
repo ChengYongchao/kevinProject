@@ -13,12 +13,18 @@ public class IntegerTest
     @Test
     public void testMin()
     {
-        int min = 0x80000000;
+/*        int min = 0x80000000;
         int minusMax = 0xFFFFFFFF;
         int max = 0x7fffffff;
         System.out.println(min);
         System.out.println(minusMax);
         System.out.println(max);
+*/
+        Integer a = 1000, b = 1000;
+        Integer c = 100, d = 100;
+        System.out.println(a == b);
+        System.out.println(c == d);
+        
     }
 
 }

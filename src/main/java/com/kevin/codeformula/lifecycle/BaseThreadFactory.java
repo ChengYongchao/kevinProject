@@ -11,10 +11,12 @@ import java.util.concurrent.atomic.AtomicLong;
  */
 public class BaseThreadFactory implements ThreadFactory
 {
-
     private ThreadGroup threadGroup;
+
     private String prefix;
+
     private String pattern;
+
     private AtomicLong threadCounter;
 
     public BaseThreadFactory(ThreadGroup threadGroup, String prefix, String pattern)
@@ -28,6 +30,7 @@ public class BaseThreadFactory implements ThreadFactory
     @Override
     public Thread newThread(Runnable r)
     {
-        return new Thread(threadGroup, r, String.format(prefix + pattern, Long.valueOf(threadCounter.incrementAndGet())));
+        return new Thread(threadGroup, r,
+                String.format(prefix + pattern, Long.valueOf(threadCounter.incrementAndGet())));
     }
 }

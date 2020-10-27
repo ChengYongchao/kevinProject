@@ -31,11 +31,11 @@ public class Client
 
     public static void main(String[] args) throws Exception
     {
-        String host ="127.0.0.1";
+        String host = "127.0.0.1";
         int port = 888;
-        new Client(host,port).start();
+        new Client(host, port).start();
     }
-    
+
     public void start() throws Exception
     {
         EventLoopGroup group = new NioEventLoopGroup();

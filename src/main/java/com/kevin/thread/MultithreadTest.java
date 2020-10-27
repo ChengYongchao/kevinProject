@@ -143,7 +143,7 @@ public class MultithreadTest
         ScheduledFuture<?> future = service2.scheduleAtFixedRate(() ->
         {
             // do something regularly
-        }, 0, 5, TimeUnit.SECONDS);// 0代表延迟0s执行，5代表每5s执行一次
+        }, 0, 5, TimeUnit.SECONDS); // 0代表延迟0s执行，5代表每5s执行一次
         if (true)// The trigger flag you want
         {
             future.cancel(true);

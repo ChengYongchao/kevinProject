@@ -143,7 +143,7 @@ public class BigFileReader
                 e.printStackTrace();
             }
         }
-        
+
         try
         {
             this.rAccessFile.close();
@@ -270,7 +270,7 @@ public class BigFileReader
                 {
                     handle(bos.toByteArray());
                 }
-                cyclicBarrier.await();// 测试性能用
+                cyclicBarrier.await(); // 测试性能用
             }
             catch (Exception e)
             {
